@@ -1,0 +1,231 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>wclogrot - Rotate Log Files
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#OPTIONS">OPTIONS</A>
+	<LI><A HREF="#BUGS">BUGS</A>
+	<LI><A HREF="#AUTHOR_AND_COPYRIGHT">AUTHOR AND COPYRIGHT</A>
+	<LI><A HREF="#VERSION">VERSION</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+wclogrot - Rotate Log Files
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+wclogrot [options] /path/to/file
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+wclogrot was designed for use on the Wood County FreeNet,
+&lt;http://www.wcnet.org/&gt;.
+
+
+<P>
+
+wclogrot is a utility to make the rotation and management of log files
+easier. It was designed to be called from a cron job or some other
+regularly scheduled process.
+
+
+<P>
+
+On many Unix systems, log files such as <CODE>/var/log/messages</CODE> will accumulate until they are manually cleaned or rotated. A common
+practice in rotating log files is to rename the current file from
+<CODE>messages</CODE> to <CODE>messages.0</CODE>, and if <CODE>messages.0</CODE> already exists, it is renamed as <CODE>messages.1</CODE> and so on.
+
+
+<P>
+
+wclogrot makes this process easier. One may simply invoke wclogrot with
+some command-line options (see ``OPTIONS'' below) to customize its behavior
+and the path to the log file which needs to be rotated. wclogrot takes care
+of keeping the right number of old log files on hand. It is able to send
+e-mail in the event of success and failure (if so desired). It can also
+compress the logs to conserve space using ``gzip''.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="OPTIONS">OPTIONS
+
+</A></H1>
+wclogrot can take a combination of many command-line options. All options
+begin with a double-dash (--). Some take mandatory parameters, while others
+are simple flags to enable a certain option.
+
+
+<P>
+
+The available options are:
+
+
+<P>
+
+--mailto ``address''
+
+
+<P>
+
+<PRE>  Send mail upon success or failure to the listed address. If rotation
+  succeeds, the mail will contain a report of the old and new filename
+  as well as the number of old log files that were removed (see the
+  `keep' parameter). By default, all e-mail will go to root@localhost.
+</PRE>
+
+<P>
+
+--mail
+
+
+<P>
+
+<PRE>  Enable the sending of mail to the address listed in
+  `mailto'. Mailing is disabled by default.
+</PRE>
+
+<P>
+
+--debug
+
+
+<P>
+
+<PRE>  Enable the output of debugging messages to STDOUT. This is really
+  only useful for development or if you are trying to track down a
+  problem. The debugging messages should give you a good idea of what
+  is happening as wclogrot goes through its motions.  Debugging is
+  disabled by default.
+</PRE>
+
+<P>
+
+--compress
+
+
+<P>
+
+<PRE>  Enable compression of the rotated log files. Currently, the only
+  supported compression program is GNU Zip (gzip). Compressed files
+  will end in a .gz suffix. Compression is disabled by default.
+</PRE>
+
+<P>
+
+--help
+
+
+<P>
+
+<PRE>  Display a brief help message to remind you of command-line
+  arguments. This won't happen by default.
+</PRE>
+
+<P>
+
+--keep &lt;number&gt;
+
+
+<P>
+
+<PRE>  Tell wclogrot how many ``old'' log files you'd like to keep. This
+  does not count the new log that will be created after rotation. If
+  you specify ``--keep 3'' for rotating /var/log/messages, you will
+  eventually end up with messages.0, messages.1, and
+  messages.2. During each rotation, log files older that specified
+  will be removed. File ``age'' is determined by the suffix, not the
+  actual timestamp. The default value for keep is 1.
+</PRE>
+
+<P>
+
+--zipcmd ``/path/to/zip/program -and_options''
+
+
+<P>
+
+<PRE>  Specify and alternate program to be used for compression. This is
+  reserved for future use and shouldn't be used in the current
+  version, as it is somewhat hard-wired for ``gzip -9''. This
+  restriction will vanish in a future version.
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+There are no known bugs yet.
+
+
+<P>
+
+wclogrot makes fairly extensive attempts to trap most trappable errors. In
+the event of a problem, it will send a failure notice via e-mail (if
+enabled) and exit with a non-zero exit code.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR_AND_COPYRIGHT">AUTHOR AND COPYRIGHT
+
+</A></H1>
+Copyright 1998, Jeremy D. Zawodny <A
+HREF="MAILTO:<jzawodn@wcnet.org>"><jzawodn@wcnet.org></A>
+
+
+<P>
+
+wclogrot may be used, copied, and re-distributed under the same terms as
+Perl.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="VERSION">VERSION
+
+</A></H1>
+$Revision: 1.3 $
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>
